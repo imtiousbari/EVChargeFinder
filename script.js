@@ -1,34 +1,45 @@
-/*
-  This is your site JavaScript code - you can add interactivity!
-*/
-
-// Print a message in the browser's dev tools console each time the page loads
-// Use your menus or right-click / control-click and choose "Inspect" > "Console"
-console.log("Hello 🌎");
-
-/* 
-Make the "Click me!" button move when the visitor clicks it:
-- First add the button to the page by following the steps in the TODO 🚧
-*/
-const btn = document.querySelector("button"); // Get the button from the page
-if (btn) { // Detect clicks on the button
-  btn.onclick = function () {
-    // The 'dipped' class in style.css changes the appearance on click
-    btn.classList.toggle("dipped");
-  };
+function show(btn, classifier,name) {
+  // black out the other buttons in the menu bar
+  var tabs = document.getElementsByClassName("w3-bar-item");
+  for (var i = 0; i < tabs.length; i++) {
+    tabs[i].classList.remove("w3-grey");
+    tabs[i].classList.add("w3-black");
+  }
+  // colour this button
+  btn.classList.remove("w3-black");
+  btn.classList.add("w3-grey");
+  
+  // hide all the elements in the class
+  var x = document.getElementsByClassName(classifier);
+  for (var i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  // show the element identified
+  var panel = document.getElementById(name);
+  panel.style.display = "block";
+  
+  // refresh the iframe
+  var iframe = panel.getElementsByTagName("iframe");
+  iframe[0].src = iframe[0].src;
 }
 
+// Request user geolocation and callback with lat, lon
+function getLocation(fun,page) {
+    var is_safari = navigator.userAgent.toLowerCase().indexOf('safari/') > -1;
+    var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome/') > -1;
+    console.log(is_safari, is_chrome);
+    if (navigator.geolocation && (!is_safari || is_chrome)) {
+        navigator.geolocation.getCurrentPosition(function(loc) {
+          fun(loc.coords.latitude, loc.coords.longitude);
+        })
+    }
+    else {
+        alert("Geolocation is not supported by this browser.");     // location defaults to central Bristol
+        fun(page,51.454514, -2.587910);
+    }
+}
 
-// ----- GLITCH STARTER PROJECT HELPER CODE -----
-
-// Open file when the link in the preview is clicked
-let goto = (file, line) => {
-  window.parent.postMessage(
-    { type: "glitch/go-to-line", payload: { filePath: file, line: line } }, "*"
-  );
-};
-// Get the file opening button from its class name
-const filer = document.querySelectorAll(".fileopener");
-filer.forEach((f) => {
-  f.onclick = () => { goto(f.dataset.file, f.dataset.line); };
-});
+// Load map with lat, lon query string
+function loadMap(page,lat,lon) {
+    location.href=page+"?lat="+lat+"&lon="+lon;
+}

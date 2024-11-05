@@ -1,75 +1,34 @@
-/* General Styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/* CSS files add styling rules to your content */
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    display: flex;
-    min-height: 100vh;
+  font-family: 'Roboto', sans-serif;
+  margin: 2em;
 }
 
-.container {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+h1 {
+  font-style: italic;
+  color: #373fff;
 }
 
-/* Header */
-.header {
-    background-color: #333;
-    color: white;
-    padding: 20px;
-    text-align: center;
-    font-size: 2rem;
+.grid-container { 
+  display: grid; 
+  grid-template-areas:
+    'ph ph ph ph ph'
+    'ln cn cn cn cn'
+    'ln cn cn cn cn'
+    ;
 }
 
-/* Sidebar */
-.sidebar {
-    background-color: #333;
-    color: white;
-    width: 250px;
-    padding-top: 20px;
-    position: fixed;
-    top: 0;
-    bottom: 0;
+header {
+  grid-area: ph;
+  padding:20px 10px;
+  background-image: url('https://cdn.glitch.com/5225ec62-05a3-4fd8-bc04-0dbcc46d255d%2Fbike-wash.png?v=1618820584365');
+  background-attachment: fixed;
 }
 
-.sidebar ul {
-    list-style: none;
-    padding-left: 0;
-}
+nav { grid-area: ln }
 
-.sidebar ul li {
-    margin: 15px 0;
-}
+main { grid-area: cn }
 
-.sidebar ul li a {
-    color: white;
-    text-decoration: none;
-    padding: 10px;
-    display: block;
-    transition: background-color 0.3s;
-}
-
-.sidebar ul li a:hover {
-    background-color: #555;
-}
-
-/* Main Content */
-.main-content {
-    margin-left: 250px;
-    padding: 20px;
-    flex-grow: 1;
-    height: calc(100vh - 60px); /* Adjust height considering header */
-    background-color: #fff;
-}
-
-iframe {
-    border: none;
-    width: 100%;
-    height: 100%;
-}
+.heading { font-family: 'Roboto Mono', monospace; font-size:x-large; }
+.search { float:right }
