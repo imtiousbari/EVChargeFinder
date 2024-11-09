@@ -1,34 +1,145 @@
-/* CSS files add styling rules to your content */
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Palanquin+Dark:wght@400;500;600;700&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
-  font-family: 'Roboto', sans-serif;
-  margin: 2em;
+  font-family: 'Open Sans', sans-serif;
+  background-color: #f4f4f4;
+  color: #000000;
 }
 
-h1 {
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; 
+  background-color: white; 
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
+  font-family: 'Palanquin Dark', sans-serif;
+  background-color: #000000;
+  color: #fff;
+  padding: 1em 0;
+  text-align: center;
+}
+header h1 {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+header nav {
+  margin-top: 10px;
+}
+
+header nav a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 15px;
+  font-weight: bold;
+}
+
+header nav a:hover {
+  text-decoration: underline;
+}
+main {
+  text-align: center;
+  padding-top: 60px;
+}
+nav{
+  font-size: 20px;
+}
+.welcome-text {
+  font-size: 1.5em;
+  margin-top: 1em;
+}
+
+.header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.logo-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.search {
+  position: relative;
+  width: 300px;
+}
+
+.search input[type="text"] {
+  width: 100%;
+  padding: 10px 45px 10px 20px; 
+  border: 2px solid #ccc;
+  border-radius: 25px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+.search input[type="text"]:focus {
+  outline: none;
+  border-color: #29A020;
+}
+.search input::placeholder {
+  color: #aaa;
   font-style: italic;
-  color: #373fff;
+}
+.search button {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #333;
+}
+.search button i {
+  font-size: 18px;
+}
+.search button:hover i {
+  color: #29A020;
 }
 
-.grid-container { 
-  display: grid; 
-  grid-template-areas:
-    'ph ph ph ph ph'
-    'ln cn cn cn cn'
-    'ln cn cn cn cn'
-    ;
+.iframe-container {
+  height: 100vh;
+  position: relative;
 }
 
-header {
-  grid-area: ph;
-  padding:20px 10px;
-  background-image: url('https://cdn.glitch.com/5225ec62-05a3-4fd8-bc04-0dbcc46d255d%2Fbike-wash.png?v=1618820584365');
-  background-attachment: fixed;
+.iframe {
+  height: 100%;
+  width: 100%;
 }
 
-nav { grid-area: ln }
+.direction-button {
+  position: absolute;
+  bottom: 30px;
+  right: 80px;
+  background-color: #29A020;
+  color: white;
+  font-size: 38px; 
+  padding: 15px 15px;
+  border-radius: 50%;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s, transform 0.3s;
+}
 
-main { grid-area: cn }
+.direction-button:hover {
+  background-color: #29A020;
+  transform: translateY(-4px); 
+}
 
-.heading { font-family: 'Roboto Mono', monospace; font-size:x-large; }
-.search { float:right }
+.direction-button:active {
+  background-color: #1e7e34; 
+  transform: translateY(2px);
+}

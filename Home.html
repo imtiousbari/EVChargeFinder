@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EV ChargeFindere</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="/script.js" defer></script>
+</head>
+
+<body>
+
+    <header>
+        <div class="header">
+            <a href="#" class="logo-link">
+                <h1>EV Charge<span style="color: #29A020;">Finder</span></h1>
+            </a>
+            <nav>
+                <a href="#findnearby" onclick="getLocation(loadMap, 'map.html')">Find Nearby</a>
+                <a href="Open247.html">Open 24/7</a>
+                <a href="EVParking.html">EV Parking</a>
+            </nav>
+            <form class="search" action="search.html">
+                <input name="searchterm" placeholder="Search.." type="text" />
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+
+        </div>
+    </header>
+    <main>
+        <div style="height: 100vh;">
+            <iframe src="https://opendata.bristol.gov.uk/datasets/ebfdcdd3a6c848a4ac8190b2dde893ca_21/explore"
+                width="50%" frameborder="0" style="height: 100%; width: 100%;"></iframe>
+                <a href="https://www.google.co.uk/maps/search/ev+charging+points" target="_blank" class="direction-button">
+                    <i class="fas fa-directions"></i>
+        </a>
+        </div>
+    </main>
+
+</body>
+
+</html>
