@@ -43,3 +43,11 @@ function getLocation(fun,page) {
 function loadMap(page,lat,lon) {
     location.href=page+"?lat="+lat+"&lon="+lon;
 }
+// document.addEventListener("DOMContentLoaded", function () {
+//   const links = document.querySelectorAll("nav a");
+//   links.forEach(link => {
+//       if (link.href === window.location.href) {
+//           link.classList.add("active");
+//       }
+//   });
+// });
