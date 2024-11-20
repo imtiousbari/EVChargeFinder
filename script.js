@@ -43,11 +43,12 @@ function getLocation(fun,page) {
 function loadMap(page,lat,lon) {
     location.href=page+"?lat="+lat+"&lon="+lon;
 }
-// document.addEventListener("DOMContentLoaded", function () {
-//   const links = document.querySelectorAll("nav a");
-//   links.forEach(link => {
-//       if (link.href === window.location.href) {
-//           link.classList.add("active");
-//       }
-//   });
-// });
+document.getElementById('homeclick-btn').addEventListener('click', function() {
+  const buttonContainer = document.getElementById('home-slider');
+  buttonContainer.style.transform = 'translateY(-100%)';
+  const mainContent = document.getElementById('main-content');
+  mainContent.style.display = 'block';
+  setTimeout(function() {
+      mainContent.style.transform = 'translateY(0)';
+  }, 50);
+});
