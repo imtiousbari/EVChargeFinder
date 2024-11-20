@@ -14,42 +14,35 @@
 </head>
 
 <body>
-
     <header>
         <div class="header">
             <a href="/" class="logo-link">
                 <h1>EV Charge<span style="color: #29A020;">Finder</span></h1>
             </a>
             <nav>
-                <a href="#findnearby" onclick="getLocation(loadMap, 'map.html')" >Find Nearby</a>
-                <a href="Open247.html" class="active" >Open 24/7</a>
+                <a href="#findnearby" onclick="getLocation(loadMap, 'map.html')">Find Nearby</a>
+                <a href="Open247.html" class="active">Open 24/7</a>
                 <a href="EVParking.html" class="active">EV Parking</a>
             </nav>
-            <form class="search" action="search.html">
+            <!-- <form class="search" action="search.html">
                 <input name="searchterm" placeholder="Search.." type="text" />
                 <button type="submit"><i class="fa fa-search"></i></button>
-            </form>
-
+            </form> -->
         </div>
     </header>
     <main>
-        
         <div style="height: 100vh;">
             <iframe src="https://opendata.bristol.gov.uk/datasets/ebfdcdd3a6c848a4ac8190b2dde893ca_21/explore"
                 width="50%" frameborder="0" style="height: 100%; width: 100%;"></iframe>
-                
-                <a href="https://www.google.co.uk/maps/search/ev+charging+points" target="_blank" class="direction-button">
-                    <i class="fas fa-directions"></i>
-                    
-        </a>
-        
+            <a href="https://www.google.co.uk/maps/search/ev+charging+points" target="_blank" class="direction-button">
+                <!-- <i class="fas fa-directions"></i> -->
+                <img src="google-maps.png" alt="Google Maps" style="width: 60px; height: 60px;" />
+            </a>
         </div>
         <footer>
-            <p>&copy; 2024 EV ChargeFinder. All rights reserved. Developed by Imtious.</p>
+            <p>&copy; 2024 EV Charge<span style="color: #29A020;">Finder</span>. All rights reserved. Developed by Imtious.</p>
         </footer>
     </main>
-    
-
 </body>
 
 </html>
