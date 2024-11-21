@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EV ChargeFinder</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <div class="header">
+            <a href="Home.html" class="logo-link">
+                <h1>EV Charge<span style="color: #29A020;">Finder</span></h1>
+            </a>
+            <nav>
+                <a href="#findnearby" onclick="getLocation(loadMap, 'map.html')">Find Nearby</a>
+                <a href="Open247.html" class="active">Open 24/7</a>
+                <a href="EVParking.html" class="active">EV Parking</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div style="height: 100vh;">
+            <div>
+                <!-- Loading Indicator -->
+                <div id="loading" style="display: flex; justify-content: center; flex-direction: column; ">
+                    <div class="spinner">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+
+                    </div>
+                    <h1 style="color: white; padding: 20px; padding-left: 30px;">Loading....</h1>
+                </div>
+                <script>
+                    const loading = document.getElementById('loading');
+                    setTimeout(() => {
+                        loading.style.display = 'none';
+                    }, 5000);
+                </script>
+
+                <iframe id="iFrameId"
+                    style="position: absolute; top: 10px; left: -547px; width: 2226px; height:100%; border: none;"
+                    src="https://opendata.bristol.gov.uk/datasets/ebfdcdd3a6c848a4ac8190b2dde893ca_21/explore"
+                    width="50%" frameborder="0" style="height: 100%; width: 100%;"></iframe>
+            </div>
+            <a href="https://www.google.co.uk/maps/search/ev+charging+points" target="_blank" class="direction-button">
+                <img src="google-maps.png" alt="Google Maps" style="width: 60px; height: 60px;" />
+            </a>
+        </div>
+        <footer>
+            <p>&copy; 2024 EV Charge<span style="color: #29A020;">Finder</span> || All rights reserved || Developed by
+                Imtious.</p>
+        </footer>
+    </main>
+</body>
+
+
+</html>

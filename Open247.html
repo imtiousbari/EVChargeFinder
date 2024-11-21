@@ -23,13 +23,13 @@
     <div class="grid-container">
         <header>
             <div class="header">
-                <a href="/" class="logo-link">
+                <a href="Home.html" class="logo-link">
                     <h1>EV Charge<span style="color: #29A020;">Finder</span></h1>
 
                 </a>
                 <nav>
                     <a href="#findnearby">Find Nearby</a>
-                    <a href="Open247.html">Open 24/7</a>
+                    <a href="Open247.html" style="color: #29A020;">Open 24/7</a>
                     <a href="EVParking.html">EV Parking</a>
                 </nav>
                 <!-- <form class="search" action="search.html">
@@ -38,12 +38,27 @@
                 </form> -->
             </div>
         </header>
-        <!-- <nav>
-        <button onclick="location.href='map.html'" class="w3-button w3-block w3-blue">Find nearest</button>
-        <button onclick="location.href='index.html'" class="w3-button w3-block w3-blue">Find by type</button>
-      </nav> -->
         <main>
             <div style="height: 100vh;">
+                <div id="loading" style="display: flex; justify-content: center; flex-direction: column; ">
+                    <div class="spinner">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
+                    <h1 style="color: white; padding: 20px; padding-left: 30px;">Loading....</h1>
+                </div>
+                <script>
+                    const loading = document.getElementById('loading');
+                    setTimeout(() => {
+                        loading.style.display = 'none';
+                    }, 5000);
+                </script>
                 <iframe style="position: absolute; top: -45px; left: -444px; width: 2226px; height:100%; border: none;"
                     src="https://opendata.bristol.gov.uk/datasets/ebfdcdd3a6c848a4ac8190b2dde893ca_21/explore?filters=eyJPcGVuMjRIb3VycyI6WyJZZXMiXX0%3D&showTable=true"
                     width="50%" frameborder="0" style="height: 100%; width: 100%;"></iframe>
@@ -52,7 +67,8 @@
             <img src="google-maps.png" alt="Google Maps" style="width: 60px; height: 60px;" />
         </a>
         <footer>
-            <p>&copy; 2024 EV Charge<span style="color: #29A020;">Finder</span> || All rights reserved || Developed by Imtious.</p>
+            <p>&copy; 2024 EV Charge<span style="color: #29A020;">Finder</span> || All rights reserved || Developed by
+                Imtious.</p>
         </footer>
     </div>
 

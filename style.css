@@ -1,5 +1,5 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Palanquin+Dark:wght@400;500;600;700&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -17,15 +17,16 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 1000; 
-  background-color: white; 
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
+  z-index: 1000;
+  background-color: white;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   font-family: 'Palanquin Dark', sans-serif;
   background-color: #000000;
   color: #fff;
   padding: 1em 0;
   text-align: center;
 }
+
 header h1 {
   font-size: 2em;
   font-weight: bold;
@@ -45,22 +46,28 @@ header nav a {
 header nav a:hover {
   text-decoration: underline;
 }
+
 main {
   text-align: center;
   padding-top: 10px;
   overflow: hidden;
 }
-nav{
+
+nav {
   font-size: 20px;
 }
+
 nav a {
   text-decoration: none !important;
   color: white;
 }
+
 nav a:hover {
-  color: #29A020; /* Hover color */
+  color: #29A020;
+  /* Hover color */
   text-decoration: none !important;
 }
+
 /* nav a:visited {
   color: white ;
   text-decoration: none;
@@ -93,7 +100,7 @@ nav a:hover {
 
 .search input[type="text"] {
   width: 100%;
-  padding: 10px 45px 10px 20px; 
+  padding: 10px 45px 10px 20px;
   border: 2px solid #ccc;
   border-radius: 25px;
   font-size: 16px;
@@ -104,10 +111,12 @@ nav a:hover {
   outline: none;
   border-color: #29A020;
 }
+
 .search input::placeholder {
   color: #aaa;
   font-style: italic;
 }
+
 .search button {
   position: absolute;
   top: 50%;
@@ -118,9 +127,11 @@ nav a:hover {
   cursor: pointer;
   color: #333;
 }
+
 .search button i {
   font-size: 18px;
 }
+
 .search button:hover i {
   color: #29A020;
 }
@@ -167,26 +178,23 @@ nav a:hover {
   right: 20px;
   /* background-color: #29A020; */
   /* color: white; */
-  font-size: 38px; 
+  font-size: 38px;
   /* padding: 15px 15px; */
   /* border-radius: 50%; */
   text-decoration: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
   transition: background-color 0.3s, transform 0.3s;
-  overflow: visible; /* Ensures pseudo-element is not clipped */
-  z-index: 2; /* Keeps the button above the pseudo-element */
+  overflow: visible;
+  z-index: 2;
 }
 
 .direction-button:hover {
-  /* background-color: #29A020; */
-  transform: translateY(-4px); 
+  transform: translateY(-4px);
 }
 
 .direction-button:active {
-  /* background-color: #1e7e34;  */
   transform: translateY(2px);
 }
 
@@ -206,13 +214,14 @@ nav a:hover {
   white-space: nowrap;
   transition: right 0.3s ease, opacity 0.3s;
   opacity: 0;
-  z-index: 3; 
+  z-index: 3;
 }
 
 .direction-button:hover::before {
   right: 120%;
   opacity: 1;
 }
+
 footer {
   position: fixed;
   bottom: 0;
@@ -221,15 +230,17 @@ footer {
   padding: 1em;
   background-color: black;
   color: white;
-  z-index: 10; /* Ensures footer is above iframe */
+  z-index: 10;
 }
+
 #home-slider {
   margin: 0;
   height: 100vh;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
-  background-color: #f0f0f0;
+  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9)), url('/evcharging.png') no-repeat center center;
+  background-size: cover;
   position: fixed;
   top: 0;
   left: 0;
@@ -237,15 +248,113 @@ footer {
   z-index: 999;
   transform: translateY(0);
   transition: transform 1s ease-in-out;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 #homeclick-btn {
-  padding: 15px 30px;
-  font-size: 16px;
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  font-size: 20px;
   cursor: pointer;
-  background-color: #4CAF50;
+  background-color: #29A020;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 30px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#homeclick-btn i {
+  /* margin-left: 5px; */
+  font-size: 35px;
+}
+
+#loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 10;
+}
+
+.spinner {
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  background-color: #29A020;
+  border-radius: 50%;
+  position: absolute;
+  animation: spin 1.2s linear infinite;
+}
+
+.dot:nth-child(1) {
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.dot:nth-child(2) {
+  top: 14%;
+  left: 85%;
+  transform: translate(-50%, -50%);
+}
+
+.dot:nth-child(3) {
+  top: 50%;
+  left: 100%;
+  transform: translate(-50%, -50%);
+}
+
+.dot:nth-child(4) {
+  top: 85%;
+  left: 85%;
+  transform: translate(-50%, -50%);
+}
+
+.dot:nth-child(5) {
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.dot:nth-child(6) {
+  top: 85%;
+  left: 14%;
+  transform: translate(-50%, -50%);
+}
+
+.dot:nth-child(7) {
+  top: 50%;
+  left: 0%;
+  transform: translate(-50%, -50%);
+}
+
+.dot:nth-child(8) {
+  top: 14%;
+  left: 14%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
 }

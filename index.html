@@ -4,10 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EV ChargeFindere</title>
+    <title>EV ChargeFinder</title>
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <script src="/script.js" defer></script>
@@ -16,15 +18,37 @@
 <body>
 
     <div id="home-slider">
-        Hello
+        <div style="margin-bottom: 20px; padding-bottom: 100px;">
+            <h1 style="color: white; font-weight: bold;">EV Charge<span
+                    style="color: #29A020; font-weight: bold;">Finder</span>
+            </h1>
+        </div>
+        <div id="text-container"
+            style="font-size: 3rem; font-weight: bold; color: #ffffff; height:60px; white-space: nowrap; overflow: hidden; display: inline-block; padding-top: 5px;">
+            <span id="animated-text"></span>
+        </div>
+        <p
+            style="color: white; font-size: 2rem; font-weight: bold; text-align: center; margin: 0 420px; margin-bottom: 50px;">
+            Discover the convenience of charging your EV with ease. Explore and locate charging points effortlessly with
+            the EV Charge<span style="color: #29A020; font-weight: bold;">Finder</span>
+            </h1>
+        </p>
         <button id="homeclick-btn">
-            Click Me
+            <p style="font-weight: bold;">Explore EVCharging Points</p>
+            <div style="margin-left: 5px ; padding-top: 5px;">
+                <i class="fa-solid fa-angle-right" style="color: black;"></i>
+                <i class="fa-solid fa-angle-right" style="color: #ffffff; margin-left: -9px;"></i>
+            </div>
         </button>
+        <p style="color: white; padding-top: 50px; margin-bottom: -50px;">&copy; 2024 EV Charge<span
+                style="color: #29A020;">Finder</span> || All rights reserved || Developed by Imtious.</p>
+
+
     </div>
 
     <header style="z-index: 1; position: relative;">
         <div class="header">
-            <a href="/" class="logo-link">
+            <a href="Home.html" class="logo-link" onclick="hideHomeSlider()">
                 <h1>EV Charge<span style="color: #29A020;">Finder</span></h1>
             </a>
             <nav>
@@ -37,6 +61,20 @@
 
     <main id="main-content" style="display: none; transform: translateY(100%); transition: transform 0s ease-in-out;">
         <div style="height: 100vh;">
+            <div id="loading" style="display: flex; justify-content: center; flex-direction: column; ">
+                <div class="spinner">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+
+                </div>
+                <h1 style="color: white; padding: 20px; padding-left: 30px;">Loading....</h1>
+            </div>
             <iframe id="iFrameId"
                 style="position: absolute; top: 10px; left: -547px; width: 2226px; height:100%; border: none;"
                 src="https://opendata.bristol.gov.uk/datasets/ebfdcdd3a6c848a4ac8190b2dde893ca_21/explore" width="50%"
