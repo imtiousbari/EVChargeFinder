@@ -10,6 +10,7 @@ body {
   font-family: 'Open Sans', sans-serif;
   background-color: #f4f4f4;
   color: #000000;
+  width: 1680px;
 }
 
 .header {
@@ -145,6 +146,7 @@ nav a:hover {
   height: 100%;
   width: 100%;
 }
+
 
 /* .direction-button {
   position: absolute;
