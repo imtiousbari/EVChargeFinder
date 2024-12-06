@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leaflet Tutorial</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+
+
+</head>
+
+<body style="margin: 0px ;">
+  <button id="locate-button">
+    <img src="/gps.png" alt="Locate Icon" style="width: 24px; height: 24px;">
+  </button>
+  <div id="map"></div>
+</body>
+
+</html>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script src="./data/line.js"></script>
+<script src="./data/point.js"></script>
+<script src="./data/polygon.js"></script>
+<script src="./data/nepaldata.js"></script>
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+<script src="./data/usstates.js"></script>
+<script>
+
+  /*===================================================
+                    OSM  LAYER               
+===================================================*/
+
+  var map = L.map('map').setView([51.4545, -2.5879], 13);
+  var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  });
+  osm.addTo(map);
+
+
+  fetch('https://maps2.bristol.gov.uk/server2/rest/services/ext/ll_transport/MapServer/21/query?outFields=*&where=1%3D1&f=geojson')
+    .then(response => response.json())
+    .then(data => {
+      L.geoJSON(data, {
+        pointToLayer: function (feature, latlng) {
+          var deviceName = feature.properties.DeviceName || "Unknown Device";
+          var County = feature.properties.County || "No location description available.";
+
+          // Create a vertical layout for the popup content
+          var popupContent = `
+          <div style="line-height: 1.6; background-color: black; color: #29A020; ">
+            <strong>${deviceName}</strong><br>
+            ${County}
+          </div>
+        `;
+
+          // Create a marker with a custom icon
+          var marker = L.marker(latlng, { icon: customIcon }).bindPopup(popupContent);
+
+          // Add the marker to the map and open the popup immediately
+          marker.addTo(map);
+
+          return marker;
+        }
+      });
+    })
+    .catch(error => console.error('Error fetching GeoJSON:', error));
+
+  document.getElementById('locate-button').addEventListener('click', function () {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition, showError);
+    } else {
+      alert("Geolocation is not supported by this browser.");
+    }
+  });
+
+  function showError(error) {
+    switch (error.code) {
+      case error.PERMISSION_DENIED:
+        alert("User denied the request for Geolocation.");
+        break;
+      case error.POSITION_UNAVAILABLE:
+        alert("Location information is unavailable.");
+        break;
+      case error.TIMEOUT:
+        alert("The request to get user location timed out.");
+        break;
+      case error.UNKNOWN_ERROR:
+        alert("An unknown error occurred.");
+        break;
+    }
+  }
+
+  // Add search control
+  // L.Control.geocoder().addTo(map);
+  var geocoder = L.Control.geocoder({
+    placeholder: 'Search for a place',
+    collapsed: false
+  }).addTo(map);
+
+  var customIcon = L.icon({
+    iconUrl: '/mapmarker.png',
+    iconSize: [42, 42],
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -32]
+  });
+  function onLocationFound(e) {
+    var latlng = e.latlng;
+
+    // Center the map at the current location
+    map.setView(latlng, 14);  // Adjust zoom level as needed
+
+    // Add a marker at the current location
+    L.marker(latlng).addTo(map)
+      .bindPopup('You are here!')
+      .openPopup();
+  }
+
+  // Function to handle geolocation error
+  function onLocationError(e) {
+    alert("Unable to retrieve your location: " + e.message);
+  }
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(onLocationFound, onLocationError);
+  } else {
+    alert("Geolocation is not supported by this browser.");
+  }
+
+
+  var CartoDB_DarkMatter = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+    subdomains: 'abcd',
+    maxZoom: 19
+  });
+  CartoDB_DarkMatter.addTo(map);
+
+  // Google Map Layer
+
+  googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+    maxZoom: 20,
+    subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+  });
+  googleStreets.addTo(map);
+
+  var Stamen_Watercolor = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
+    attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    subdomains: 'abcd',
+    minZoom: 1,
+    maxZoom: 16,
+    ext: 'jpg'
+  });
+  Stamen_Watercolor.addTo(map);
+
+
+  /*===================================================
+                        GEOJSON               
+  ===================================================*/
+
+  var linedata = L.geoJSON(lineJSON).addTo(map);
+  var pointdata = L.geoJSON(pointJSON).addTo(map);
+  var nepalData = L.geoJSON(nepaldataa).addTo(map);
+  var polygondata = L.geoJSON(polygonJSON, {
+    onEachFeature: function (feature, layer) {
+      layer.bindPopup('<b>This is a </b>' + feature.properties.name)
+    },
+    style: {
+      fillColor: 'red',
+      fillOpacity: 1,
+      color: 'green'
+    }
+  }).addTo(map);
+
+  /*===================================================
+                        LAYER CONTROL               
+  ===================================================*/
+
+  var baseLayers = {
+    "Satellite": googleSat,
+    "Google Map": googleStreets,
+    "Water Color": Stamen_Watercolor,
+    "OpenStreetMap": osm,
+  };
+
+  var overlays = {
+    "Marker": singleMarker,
+    "PointData": pointdata,
+    "LineData": linedata,
+    "PolygonData": polygondata
+  };
+
+  L.control.layers(baseLayers, overlays).addTo(map);
+
+
+  /*===================================================
+                        SEARCH BUTTON               
+  ===================================================*/
+
+  L.Control.geocoder().addTo(map);
+
+
+  /*===================================================
+                        Choropleth Map               
+  ===================================================*/
+
+  L.geoJSON(statesData).addTo(map);
+
+
+  function getColor(d) {
+    return d > 1000 ? '#800026' :
+      d > 500 ? '#BD0026' :
+        d > 200 ? '#E31A1C' :
+          d > 100 ? '#FC4E2A' :
+            d > 50 ? '#FD8D3C' :
+              d > 20 ? '#FEB24C' :
+                d > 10 ? '#FED976' :
+                  '#FFEDA0';
+  }
+
+  function style(feature) {
+    return {
+      fillColor: getColor(feature.properties.density),
+      weight: 2,
+      opacity: 1,
+      color: 'white',
+      dashArray: '3',
+      fillOpacity: 0.7
+    };
+  }
+
+  L.geoJson(statesData, { style: style }).addTo(map);
+
+  function highlightFeature(e) {
+    var layer = e.target;
+
+    layer.setStyle({
+      weight: 5,
+      color: '#666',
+      dashArray: '',
+      fillOpacity: 0.7
+    });
+
+    if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+      layer.bringToFront();
+    }
+
+    info.update(layer.feature.properties);
+  }
+
+  function resetHighlight(e) {
+    geojson.resetStyle(e.target);
+    info.update();
+  }
+
+  var geojson;
+  // ... our listeners
+  geojson = L.geoJson(statesData);
+
+  function zoomToFeature(e) {
+    map.fitBounds(e.target.getBounds());
+  }
+
+  function onEachFeature(feature, layer) {
+    layer.on({
+      mouseover: highlightFeature,
+      mouseout: resetHighlight,
+      click: zoomToFeature
+    });
+  }
+
+  geojson = L.geoJson(statesData, {
+    style: style,
+    onEachFeature: onEachFeature
+  }).addTo(map);
+
+  var info = L.control();
+
+  info.onAdd = function (map) {
+    this._div = L.DomUtil.create('div', 'info');
+    this.update();
+    return this._div;
+  };
+
+  info.update = function (props) {
+    this._div.innerHTML = '<h4>US Population Density</h4>' + (props ?
+      '<b>' + props.name + '</b><br />' + props.density + ' people / mi<sup>2</sup>'
+      : 'Hover over a state');
+  };
+
+  info.addTo(map);
+
+  var legend = L.control({ position: 'bottomright' });
+
+  legend.onAdd = function (map) {
+
+    var div = L.DomUtil.create('div', 'info legend'),
+      grades = [0, 10, 20, 50, 100, 200, 500, 1000],
+      labels = [];
+    for (var i = 0; i < grades.length; i++) {
+      div.innerHTML +=
+        '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+        grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+    }
+
+    return div;
+  };
+
+  legend.addTo(map);
+  document.addEventListener("DOMContentLoaded", function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('findlocation')) {
+      getLocation();
+    }
+  });
+
+  function getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition, showError);
+    } else {
+      alert("Geolocation is not supported by this browser.");
+    }
+  }
+
+  function showPosition(position) {
+    var userLat = position.coords.latitude;
+    var userLng = position.coords.longitude;
+    var userLatLng = L.latLng(userLat, userLng);
+    map.setView(userLatLng, 15);
+
+    var customIcon = L.icon({
+      iconUrl: '/person.png',
+      iconSize: [72, 82],
+      iconAnchor: [16, 32],
+      popupAnchor: [0, -32]
+    });
+    var userMarker = L.marker(userLatLng, { icon: customIcon })
+      .addTo(map)
+      .bindPopup("You are here!", { closeButton: false })
+      .openPopup();
+
+    geojsonLayer.eachLayer(function (layer) {
+      var markerLatLng = layer.getLatLng();
+      if (userLatLng.distanceTo(markerLatLng) <= 2000) {
+        layer.openPopup();
+      }
+    });
+  }
+
+
+
+</script>

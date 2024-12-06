@@ -10,14 +10,14 @@ body {
   font-family: 'Open Sans', sans-serif;
   background-color: #f4f4f4;
   color: #000000;
-  width: 1680px;
+  margin: 0px !important;
 }
 
 .header {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 1680px;
   z-index: 1000;
   background-color: white;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
@@ -69,15 +69,6 @@ nav a:hover {
   text-decoration: none !important;
 }
 
-/* nav a:visited {
-  color: white ;
-  text-decoration: none;
-}
-
-/* nav a.active {
-  color: #a02020; 
-  text-decoration: none;
-}  */
 .welcome-text {
   font-size: 1.5em;
   margin-top: 1em;
@@ -147,42 +138,11 @@ nav a:hover {
   width: 100%;
 }
 
-
-/* .direction-button {
-  position: absolute;
-  bottom: 30px;
-  right: 80px;
-  background-color: #29A020;
-  color: white;
-  font-size: 38px; 
-  padding: 15px 15px;
-  border-radius: 50%;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s, transform 0.3s;
-}
-
-.direction-button:hover {
-  background-color: #29A020;
-  transform: translateY(-4px); 
-}
-
-.direction-button:active {
-  background-color: #1e7e34; 
-  transform: translateY(2px);
-} */
 .direction-button {
   position: absolute;
   bottom: 80px;
   right: 20px;
-  /* background-color: #29A020; */
-  /* color: white; */
   font-size: 38px;
-  /* padding: 15px 15px; */
-  /* border-radius: 50%; */
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -227,7 +187,8 @@ nav a:hover {
 footer {
   position: fixed;
   bottom: 0;
-  width: 100%;
+  /* width: 100%; */
+  width: 1680px;
   text-align: center;
   padding: 1em;
   background-color: black;
@@ -269,7 +230,6 @@ footer {
 }
 
 #homeclick-btn i {
-  /* margin-left: 5px; */
   font-size: 35px;
 }
 
@@ -359,4 +319,160 @@ footer {
   50% {
     opacity: 0.3;
   }
+}
+
+#map {
+  height: 100vh;
+  width: 100%;
+}
+
+.info {
+  padding: 6px 8px;
+  font: 14px/16px Arial, Helvetica, sans-serif;
+  background: white;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+}
+
+.info h4 {
+  margin: 0 0 5px;
+  color: #777;
+}
+
+.legend {
+  line-height: 18px;
+  color: #555;
+}
+
+.legend i {
+  width: 18px;
+  height: 18px;
+  float: left;
+  margin-right: 8px;
+  opacity: 0.7;
+}
+
+#locate-button {
+  position: absolute;
+  top: 600px;
+  right: 20px;
+  z-index: 1000;
+  width: 60px;
+  height: 60px;
+  background: black;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+#locate-button i {
+  color: white;
+  font-size: 24px;
+}
+
+#locate-button:hover {
+  transform: translateY(-4px);
+}
+
+#locate-button:active {
+  transform: translateY(2px);
+}
+
+#locate-button::before {
+  content: "Locate Me";
+  position: absolute;
+  top: 50%;
+  right: -100%;
+  transform: translateY(-50%);
+  background-color: #020202;
+  color: rgb(255, 255, 255); /* Make sure the text color is black for contrast */
+  padding: 8px 16px;
+  font-size: 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+  white-space: nowrap;
+  transition: right 0.3s ease, opacity 0.3s;
+  opacity: 0;
+  z-index: 3;
+}
+
+#locate-button:hover::before {
+  right: 120%;
+  opacity: 1;
+}
+
+
+.leaflet-control-geocoder {
+  border: 2px !important;
+  border: 4px solid #29A020 !important;
+  border-radius: 25px;
+
+}
+
+.leaflet-control-geocoder input {
+  width: 800px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 25px;
+  color: #000000;
+  background-color: #ffffff;
+}
+
+.leaflet-control-geocoder .leaflet-bar button {
+  background-color: #29A020;
+  border: none !important;
+  color: white;
+  font-size: 18px;
+  padding: 8px;
+  border-radius: 0%;
+}
+
+.leaflet-control-geocoder .leaflet-bar button:hover {
+  background-color: #1f7a1f;
+}
+
+.leaflet-control-geocoder input::placeholder {
+  color: #000000;
+}
+
+.leaflet-control-geocoder-icon {
+  display: none !important;
+}
+
+.leaflet-control-geocoder-alternatives {
+  width: auto !important;
+  padding: 5px;
+}
+
+.leaflet-control-geocoder-alternatives li {
+  border-bottom: 1px solid #28a021;
+}
+
+.leaflet-top {
+  top: 100px;
+}
+
+.leaflet-right {
+  right: 400px;
+}
+
+.leaflet-control-zoom-in {
+  display: none !important;
+}
+
+.leaflet-control-zoom-out {
+  display: none !important;
+}
+.leaflet-popup-content-wrapper, .leaflet-popup-tip{
+  background-color: #000000 !important;
+  color: #29A020 !important;
+}
+.leaflet-popup-close-button {
+  display: none !important;
 }
